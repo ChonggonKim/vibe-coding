@@ -61,7 +61,7 @@ export default function RecommendationSection() {
         <CardHeader className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <Badge variant="secondary" className="mb-2 flex w-fit items-center gap-2 uppercase tracking-wide">
-              <Sparkles className="h-4 w-4 text-blue-500 dark:text-blue-300" />
+              <Sparkles className="h-5 w-5 text-blue-500 dark:text-blue-300" />
               추천 API
             </Badge>
             <CardTitle>오늘의 한 줄 추천</CardTitle>
@@ -75,7 +75,7 @@ export default function RecommendationSection() {
             onClick={() => fetchRecommendations()}
             disabled={isLoading}
           >
-            {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <RefreshCw className="h-4 w-4" />}
+            {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <RefreshCw className="h-5 w-5" />}
             새 추천 받기
           </Button>
         </CardHeader>
@@ -91,7 +91,7 @@ export default function RecommendationSection() {
             <div className="rounded-3xl border border-neutral-200 bg-gradient-to-br from-blue-50 via-white to-purple-50 p-6 shadow-lg dark:border-neutral-800 dark:from-blue-950/30 dark:via-neutral-900 dark:to-purple-950/30">
               <div className="flex items-start gap-4">
                 <div className="rounded-full bg-blue-500/10 p-3 text-blue-500 dark:text-blue-300">
-                  <Quote className="h-5 w-5" />
+                  <Quote className="h-6 w-6" />
                 </div>
                 <div className="flex-1 space-y-3">
                   <p className="text-sm font-semibold uppercase tracking-wide text-blue-500 dark:text-blue-300">
@@ -107,7 +107,7 @@ export default function RecommendationSection() {
           ) : (
             <div className="flex items-center justify-center rounded-2xl border-2 border-dashed border-neutral-200 p-10 dark:border-neutral-800">
               <div className="flex items-center gap-3 text-neutral-500 dark:text-neutral-400">
-                <Loader2 className="h-5 w-5 animate-spin" />
+                <Loader2 className="h-6 w-6 animate-spin" />
                 추천 문구를 불러오는 중입니다...
               </div>
             </div>

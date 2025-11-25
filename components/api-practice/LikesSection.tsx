@@ -165,9 +165,9 @@ export default function LikesSection() {
               className="gap-2"
             >
               {isLoading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
-                <RefreshCw className="h-4 w-4" />
+                <RefreshCw className="h-5 w-5" />
               )}
               새로고침
             </Button>
@@ -204,7 +204,7 @@ export default function LikesSection() {
                       </div>
                       <div className="flex flex-col items-center gap-1">
                         <Heart
-                          className={`h-5 w-5 transition-all ${
+                          className={`h-6 w-6 transition-all ${
                             optionIsLiked
                               ? "fill-red-500 text-red-500"
                               : "fill-neutral-300 text-neutral-300"
@@ -248,7 +248,7 @@ export default function LikesSection() {
                     }`}
                   >
                     <Heart
-                      className={`h-12 w-12 transition-all duration-200 ${
+                      className={`h-16 w-16 transition-all duration-200 ${
                         currentIsLiked
                           ? "fill-red-500 text-red-500"
                           : "fill-neutral-300 text-neutral-300 hover:fill-red-300 hover:text-red-300"
@@ -285,17 +285,17 @@ export default function LikesSection() {
               <div className="relative z-10 flex items-center justify-center gap-2">
                 {isToggling ? (
                   <>
-                    <Loader2 className="h-5 w-5 animate-spin" />
+                    <Loader2 className="h-6 w-6 animate-spin" />
                     처리 중...
                   </>
                 ) : currentIsLiked ? (
                   <>
-                    <Heart className="h-5 w-5 fill-white" />
+                    <Heart className="h-6 w-6 fill-white" />
                     좋아요 취소
                   </>
                 ) : (
                   <>
-                    <Heart className="h-5 w-5" />
+                    <Heart className="h-6 w-6" />
                     좋아요
                   </>
                 )}

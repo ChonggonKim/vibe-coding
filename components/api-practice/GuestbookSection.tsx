@@ -183,12 +183,12 @@ export default function GuestbookSection() {
             <Button type="submit" disabled={isSubmitting} className="w-full gap-2">
               {isSubmitting ? (
                 <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
+                  <Loader2 className="h-5 w-5 animate-spin" />
                   작성 중...
                 </>
               ) : (
                 <>
-                  <Send className="h-4 w-4" />
+                  <Send className="h-5 w-5" />
                   방명록 작성
                 </>
               )}
@@ -210,7 +210,7 @@ export default function GuestbookSection() {
               className="gap-2"
             >
               {isLoading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="h-5 w-5 animate-spin" />
               ) : (
                 "새로고침"
               )}
@@ -258,9 +258,9 @@ export default function GuestbookSection() {
                       className="text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-950/30"
                     >
                       {deletingId === entry.id ? (
-                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <Loader2 className="h-5 w-5 animate-spin" />
                       ) : (
-                        <Trash2 className="h-4 w-4" />
+                        <Trash2 className="h-5 w-5" />
                       )}
                     </Button>
                   </div>

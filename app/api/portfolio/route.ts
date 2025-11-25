@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server";
-import { portfolioData } from "@/lib/data/portfolio";
+import { getPortfolioData } from "@/lib/data/portfolio";
 
 export async function GET() {
   try {
+    const portfolioData = await getPortfolioData();
+
     return NextResponse.json(
       {
         success: true,
@@ -28,4 +30,3 @@ export async function GET() {
     );
   }
 }
-

@@ -1,3 +1,5 @@
+import supabase from '@/lib/supabase';
+
 export interface Project {
   title: string;
   description: string;
@@ -33,7 +35,8 @@ export interface PortfolioData {
   skills: SkillGroup[];
 }
 
-export const portfolioData: PortfolioData = {
+// 메모리 폴백용 기본 데이터
+const defaultPortfolioData: PortfolioData = {
   profile: {
     name: "바이브 코딩",
     title: "프론트엔드 엔지니어",
@@ -101,3 +104,27 @@ export const portfolioData: PortfolioData = {
   ],
 };
 
+// DB 또는 메모리 기본 데이터에서 포트폴리오 정보를 읽음
+export async function getPortfolioData(): Promise<PortfolioData> {
+  if (supabase) {
+    const { data, error } = await supabase
+      .from('portfolio')
+      .select('data')
+      .eq('id', 'vibe-coding')
+      .single();
+
+    if (error) {
+      console.error('Supabase portfolio select error', error);
+      return defaultPortfolioData;
+    }
+
+    if (data && (data as any).data) {
+      return (data as any).data as PortfolioData;
+    }
+  }
+
+  return defaultPortfolioData;
+}
+
+// 기본값 내보내기 (호환성용)
+export const portfolioData = defaultPortfolioData;

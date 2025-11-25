@@ -11,15 +11,17 @@ export async function GET(request: NextRequest) {
     const count = countParam ? Number.parseInt(countParam, 10) : 1;
 
     const recommendations = countParam
-      ? getRandomRecommendations(count)
-      : getRandomRecommendations(1);
+      ? await getRandomRecommendations(count)
+      : await getRandomRecommendations(1);
+
+    const pool = await getAllRecommendations();
 
     return NextResponse.json(
       {
         success: true,
         data: {
           recommendations,
-          totalPoolSize: getAllRecommendations().length,
+          totalPoolSize: pool.length,
         },
         timestamp: new Date().toISOString(),
       },

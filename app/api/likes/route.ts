@@ -15,11 +15,11 @@ export async function GET(request: NextRequest) {
 
     // voteId가 없으면 모든 투표 항목의 좋아요 수 반환
     if (!voteId) {
-      const allCounts = getAllLikesCounts();
+      const allCounts = await getAllLikesCounts();
       const allStatuses: Record<string, boolean> = {};
       if (userId) {
         for (const id of Object.keys(allCounts)) {
-          allStatuses[id] = checkLikeStatus(id, userId);
+          allStatuses[id] = await checkLikeStatus(id, userId);
         }
       }
 
@@ -43,8 +43,8 @@ export async function GET(request: NextRequest) {
     }
 
     // 특정 투표 항목의 좋아요 수 및 상태 반환
-    const count = getLikesCount(voteId);
-    const isLiked = userId ? checkLikeStatus(voteId, userId) : false;
+    const count = await getLikesCount(voteId);
+    const isLiked = userId ? await checkLikeStatus(voteId, userId) : false;
 
     return NextResponse.json(
       {
@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const result = toggleLike(voteId, userId);
+  const result = await toggleLike(voteId, userId);
 
     return NextResponse.json(
       {

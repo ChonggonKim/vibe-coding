@@ -35,7 +35,7 @@ export default function Home() {
           <Card className="relative overflow-hidden border-neutral-200 bg-white/90 dark:border-neutral-800 dark:bg-neutral-900/70">
             <CardHeader className="space-y-6">
               <Badge variant="glow" className="w-fit gap-2">
-                <Sparkles className="h-3.5 w-3.5" />
+                <Sparkles className="h-4 w-4" />
                 {profile.tagline}
               </Badge>
               <CardTitle className="text-4xl font-semibold leading-tight sm:text-5xl">
@@ -43,7 +43,7 @@ export default function Home() {
                 <br />
                 {profile.title}, {profile.name}입니다.
               </CardTitle>
-              <CardDescription className="text-lg">
+              <CardDescription className="text-base sm:text-lg">
                 {profile.description}
               </CardDescription>
             </CardHeader>
@@ -347,18 +347,18 @@ export default function Home() {
             </CardHeader>
             <CardContent>
               <Tabs defaultValue="guestbook" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="guestbook" className="gap-2">
-                    <MessageSquare className="h-4 w-4" />
-                    방명록
+                <TabsList className="grid w-full grid-cols-3 gap-1">
+                  <TabsTrigger value="guestbook" className="gap-2 text-sm">
+                    <MessageSquare className="h-5 w-5" />
+                    <span className="hidden sm:inline">방명록</span>
                   </TabsTrigger>
-                  <TabsTrigger value="likes" className="gap-2">
-                    <Heart className="h-4 w-4" />
-                    좋아요
+                  <TabsTrigger value="likes" className="gap-2 text-sm">
+                    <Heart className="h-5 w-5" />
+                    <span className="hidden sm:inline">좋아요</span>
                   </TabsTrigger>
-                  <TabsTrigger value="recommendation" className="gap-2">
-                    <Sparkles className="h-4 w-4" />
-                    랜덤 추천
+                  <TabsTrigger value="recommendation" className="gap-2 text-sm">
+                    <Sparkles className="h-5 w-5" />
+                    <span className="hidden sm:inline">추천</span>
                   </TabsTrigger>
                 </TabsList>
 

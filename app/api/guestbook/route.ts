@@ -8,7 +8,7 @@ import {
 // GET: 방명록 목록 조회
 export async function GET() {
   try {
-    const entries = getGuestbookEntries();
+  const entries = await getGuestbookEntries();
     return NextResponse.json(
       {
         success: true,
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const newEntry = addGuestbookEntry(name.trim(), message.trim());
+  const newEntry = await addGuestbookEntry(name.trim(), message.trim());
 
     return NextResponse.json(
       {
