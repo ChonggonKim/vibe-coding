@@ -1,5 +1,7 @@
+"use client";
+
 import Image from "next/image";
-import { ArrowUpRight, Github, Mail, Sparkles } from "lucide-react";
+import { ArrowUpRight, Github, Mail, Sparkles, MessageSquare, Heart } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -10,6 +12,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { portfolioData } from "@/lib/data/portfolio";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import GuestbookSection from "@/components/api-practice/GuestbookSection";
+import LikesSection from "@/components/api-practice/LikesSection";
+import RecommendationSection from "@/components/api-practice/RecommendationSection";
 
 const heroImages = [
   { src: "/window.svg", alt: "제품 인터페이스 미리보기", size: 260 },
@@ -18,62 +25,7 @@ const heroImages = [
   { src: "/next.svg", alt: "Next.js 로고", size: 120 },
 ];
 
-const projects = [
-  {
-    title: "실시간 협업 IDE 플랫폼",
-    description:
-      "WebSocket 기반 시그널 서버와 Monaco Editor를 결합해 여러 사용자가 동시에 코드 리뷰와 페어 프로그래밍을 진행할 수 있는 클라우드 IDE를 제작했습니다.",
-    impact:
-      "세션 동기화 지연 150ms 이하, 주당 300+ 팀이 사용하는 내부 도구로 확장",
-    stack: ["Next.js", "tRPC", "WebSocket", "PostgreSQL", "Redis"],
-  },
-  {
-    title: "AI 코드 베이스 탐색 도우미",
-    description:
-      "대규모 리포지토리에서 의미 기반 검색을 제공하고, LLM 체인을 이용해 코드 설명과 리팩터링 제안을 제공하는 개발 플러그인을 만들었습니다.",
-    impact: "온보딩 시간 40% 단축, 월간 2만 회 질의를 처리하는 서비스",
-    stack: ["Next.js", "LangChain", "OpenAI API", "Supabase", "Tailwind CSS"],
-  },
-  {
-    title: "모듈형 디자인 시스템",
-    description:
-      "일관된 인터랙션 경험을 위해 토큰 기반 디자인 시스템과 컴포넌트 라이브러리를 구축하고 사내 프로젝트 6개에 적용했습니다.",
-    impact: "UI 개발 속도 30% 향상, 접근성 이슈 20% 감소",
-    stack: ["Storybook", "Next.js", "Radix UI", "TypeScript"],
-  },
-];
-
-const experiences = [
-  {
-    company: "Vibe Coding Lab",
-    role: "프론트엔드 리드",
-    period: "2023.06 - 현재",
-    summary:
-      "제품 로드맵 수립, 디자인 시스템 운영, 데이터 파이프라인 자동화를 통해 실험-배포 사이클을 단축했습니다.",
-  },
-  {
-    company: "Nextrail",
-    role: "풀스택 엔지니어",
-    period: "2021.03 - 2023.05",
-    summary:
-      "B2B 대시보드, 인증 시스템, 멀티 테넌트 인프라를 설계하고 유지보수했습니다.",
-  },
-];
-
-const skillGroups = [
-  {
-    title: "Frontend",
-    items: ["Next.js", "React", "TanStack Query", "Next Auth", "Zustand"],
-  },
-  {
-    title: "Backend & DevOps",
-    items: ["Node.js", "tRPC", "PostgreSQL", "Prisma", "Docker", "Vercel"],
-  },
-  {
-    title: "Productivity",
-    items: ["Jira", "Figma", "Storybook", "GitHub Actions", "Linear"],
-  },
-];
+const { projects, experiences, skills: skillGroups, profile } = portfolioData;
 
 export default function Home() {
   return (
@@ -84,17 +36,15 @@ export default function Home() {
             <CardHeader className="space-y-6">
               <Badge variant="glow" className="w-fit gap-2">
                 <Sparkles className="h-3.5 w-3.5" />
-                바이브 코딩 첫 Next.js 프로젝트
+                {profile.tagline}
               </Badge>
               <CardTitle className="text-4xl font-semibold leading-tight sm:text-5xl">
-                사용자 경험과 생산성을 동시에 높이는
+                {profile.description.split(" ").slice(0, 8).join(" ")}
                 <br />
-                프론트엔드 엔지니어, 바이브 코딩입니다.
+                {profile.title}, {profile.name}입니다.
               </CardTitle>
               <CardDescription className="text-lg">
-                데이터 기반 실험과 디자인 시스템 운영 경험을 바탕으로,
-                프로덕트 아이디어를 빠르게 검증하고 안정적으로 확장 가능한
-                환경을 설계합니다.
+                {profile.description}
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-wrap gap-3">
@@ -104,7 +54,7 @@ export default function Home() {
                 variant="primary"
                 className="gap-2 shadow-xl shadow-blue-600/30"
               >
-                <a href="mailto:hello@vibecoding.dev">
+                <a href={`mailto:${profile.email}`}>
                   <Mail className="h-4 w-4" />
                   프로젝트 문의하기
                 </a>
@@ -128,7 +78,7 @@ export default function Home() {
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <CardTitle className="text-3xl font-semibold">
-                  3년 차 프론트엔드 리드
+                  {profile.yearsOfExperience}년 차 {profile.role}
                 </CardTitle>
                 <CardDescription className="mt-2 max-w-sm text-base">
                   실사용자 피드백과 빠른 실험에 집중해 협업 IDE, AI 코드 도우미
@@ -175,10 +125,12 @@ export default function Home() {
               variant="ghost"
               className="gap-2 text-neutral-600 hover:text-neutral-900 dark:text-neutral-300 dark:hover:text-white"
             >
-              <a href="https://github.com/vibe-coding" target="_blank">
-                GitHub 살펴보기
-                <Github className="h-4 w-4" />
-              </a>
+              {profile.github && (
+                <a href={profile.github} target="_blank" rel="noopener noreferrer">
+                  GitHub 살펴보기
+                  <Github className="h-4 w-4" />
+                </a>
+              )}
             </Button>
           </div>
           <div className="grid gap-6 md:grid-cols-2">
@@ -364,23 +316,67 @@ export default function Home() {
           </CardDescription>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <Button asChild size="lg" className="gap-2">
-              <a href="mailto:hello@vibecoding.dev">
+              <a href={`mailto:${profile.email}`}>
                 <Mail className="h-4 w-4" />
-                hello@vibecoding.dev
+                {profile.email}
               </a>
             </Button>
-            <Button asChild size="lg" variant="secondary" className="gap-2">
-              <a
-                href="https://github.com/vibe-coding"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <Github className="h-4 w-4" />
-                GitHub에서 더 보기
-              </a>
-            </Button>
+            {profile.github && (
+              <Button asChild size="lg" variant="secondary" className="gap-2">
+                <a href={profile.github} target="_blank" rel="noreferrer">
+                  <Github className="h-4 w-4" />
+                  GitHub에서 더 보기
+                </a>
+              </Button>
+            )}
           </div>
         </Card>
+
+        <section className="space-y-8">
+          <Card className="border-neutral-200 bg-white/90 dark:border-neutral-800 dark:bg-neutral-900/80">
+            <CardHeader>
+              <Badge variant="secondary" className="w-fit uppercase tracking-wide">
+                API 실습
+              </Badge>
+              <CardTitle className="text-3xl font-semibold">
+                백엔드 API 기능 테스트
+              </CardTitle>
+              <CardDescription className="text-lg">
+                방명록, 좋아요, 랜덤 추천 API를 직접 테스트해보세요
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Tabs defaultValue="guestbook" className="w-full">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="guestbook" className="gap-2">
+                    <MessageSquare className="h-4 w-4" />
+                    방명록
+                  </TabsTrigger>
+                  <TabsTrigger value="likes" className="gap-2">
+                    <Heart className="h-4 w-4" />
+                    좋아요
+                  </TabsTrigger>
+                  <TabsTrigger value="recommendation" className="gap-2">
+                    <Sparkles className="h-4 w-4" />
+                    랜덤 추천
+                  </TabsTrigger>
+                </TabsList>
+
+                <TabsContent value="guestbook" className="mt-6">
+                  <GuestbookSection />
+                </TabsContent>
+
+                <TabsContent value="likes" className="mt-6">
+                  <LikesSection />
+                </TabsContent>
+
+                <TabsContent value="recommendation" className="mt-6">
+                  <RecommendationSection />
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
+        </section>
       </main>
     </div>
   );
